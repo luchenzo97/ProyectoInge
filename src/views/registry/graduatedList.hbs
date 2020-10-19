@@ -1,0 +1,27 @@
+<div class="container p-4">
+    <div class="card text-center">
+        <div class="card-body">
+            <h3 class="card-title text-uppercase">Graduadas MenTe</h3><br>
+            <hr />
+            <br>
+            {{#if graduated}}
+            <table class="ApplicantsTable">
+                <tr>
+                    <th>Nombre</th>
+                    <th>Cedula</th>
+                </tr>
+                {{#each graduated}}
+                <tr>
+                    <td>{{GraduatedName}}</td>
+                    <td>{{GraduatedIdentification}}</td>
+                    <td><a href="#" class="btn btn-primary" id="ViewApplicants">Aceptar</a></td>
+                    <td><a href="#" class="btn btn-primary" id="ViewApplicants">Eliminar</a></td>
+                </tr>
+                {{/each}}
+            </table>
+            {{else}}
+            <p> No hay nuevos registros</p>
+            {{/if}}
+        </div>
+    </div>
+</div>

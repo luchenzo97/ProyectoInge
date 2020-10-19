@@ -1,0 +1,78 @@
+{{! Codigo parcial para la navegación}}
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <div class="container">
+    <a class="navbar-brand" href="/">Atlas en Accion</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+      aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav ml-auto">
+        
+        {{#if user}} {{! si el usuario existe, es decir, está logueado, muestre esto}}
+        
+          {{#if user.IsColab}}
+            <li class="nav-item">
+              <a class="nav-link" href="/registry/applicationsList">Aplicantes</a>
+            </li>
+
+            <li class="nav-item">
+              <a class="nav-link" href="/registry/GraduatedList">Registro Graduadas</a>
+            </li>
+          {{/if}}
+
+        <li class="nav-item">
+          <a class="nav-link" href="/profile">Perfil</a>
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link" href="/logout">Log Out</a>
+        </li>
+        
+        {{else}}
+        
+        <li class="nav-item">
+          <a class="nav-link" href="/loginColab">Log In</a>
+        </li>
+
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+            aria-haspopup="true" aria-expanded="false">
+            Programa MenTe en Acción
+          </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <a class="dropdown-item" href="/registry/apply">Aplicar a MenTe</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="/registry/signup">Resistrarme como egresada MenTe</a>
+          </div>
+        </li>
+
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+            aria-haspopup="true" aria-expanded="false">
+            TESTING
+          </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <a class="dropdown-item" href="/signupColab">Crear usuario colaborador de testing</a>
+          </div>
+        </li>
+        
+        {{/if}}
+
+        {{!<li class="nav-item active">
+          <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Features</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Pricing</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
+        </li> }}
+      </ul>
+    </div>
+  </div>
+</nav>

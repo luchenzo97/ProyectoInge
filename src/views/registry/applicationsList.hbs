@@ -1,0 +1,27 @@
+<!-- Vista de las aplicaciones -->
+<div class="container p-4">
+    <div class="card text-center">
+        <div class="card-body">
+            <h3 class="card-title text-uppercase">Aplicantes a proyecto MenTe</h3><br>
+            <hr />
+            <br>
+            {{#if applicants}}
+            <table class="ApplicantsTable">
+                <tr>
+                    <th>Nombre</th>
+                    <th>Cedula</th>
+                </tr>
+                {{#each applicants}}
+                <tr>
+                    <td>{{ApplicantName}}</td>
+                    <td>{{ApplicantIdentification}}</td>
+                    <td><a href="/registry/applicant/{{ApplicantIdentification}}" class="btn btn-primary" id="ViewApplicants">Ver</a></td>
+                </tr>
+                {{/each}}
+            </table>
+            {{else}}
+            <p> No hay nuevas aplicaciones</p>
+            {{/if}}
+        </div>
+    </div>
+</div>

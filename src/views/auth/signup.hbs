@@ -1,0 +1,149 @@
+<div class="container p-4">
+    <div class="row">
+        <div class="col-md4 mx-auto">
+            <div class="card text-center">
+                <div class="card-header">
+                    <h3>SignUp Graduada</h3>
+                </div>
+                <div class="card-body">
+                    <img src="/images/logo.jpg" alt="Logo Proyecto Mente en Accion" class="card-img-top mx-auto m-2 rounded-circle w-25">
+                    <form action="/registry/signup" method="POST">
+                        <div class="form-group">
+                            <input required type="text" name="GraduatedName" placeholder="Nombre Completo" class="form-control" autofocus>
+                        </div>
+                        <div class="form-group">
+                            <input required type="text" name="GraduatedIdentification" placeholder="Cedula" class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <input required type="text" name="GraduatedPhone" placeholder="Numero Telefono" class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <input required type="text" name="GraduatedEmail" placeholder="Email" class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <input required type="password" name="password" placeholder="Password" class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <button class="btn btn-success btn-block">SignUp</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{{!<div class="container p-4">
+    <div class="row">
+        <div class="col-md-4 mx-auto">
+            <div class="card">
+                <div class="card-body">
+                    <h1>Formulario de Inscripcion MenTe</h1>
+                    <form action="#">
+                        <div class="form-group">
+                            <label for="Text">Nombre Completo</label>
+                            <input type="Text" class="form-control" id="name" placeholder=" " name="name">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="Text">Numero de Cedula</label>
+                            <input type="Text" class="form-control" id="cedula" placeholder=" " name="cedula">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="Text">Teléfono</label>
+                            <input type="tel" class="form-control" id="phone" placeholder=" " name="phone">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="email">Correo electrónico:</label>
+                            <input type="email" class="form-control" id="email" placeholder="Enter email" name="email">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="date">Fecha de nacimiento:</label>
+                            <input type="dt" class="form-control" id="dt" placeholder="dd/mm/aaaa" name="date">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="date">Edad exacta (años y meses):</label>
+                            <input type="text" class="form-control" id="dt" placeholder="dd/mm/aaaa" name="age">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="provincia">Provincia:</label>
+                            <select name="provincia" id="provincia">
+                                <option value="SJO">San José</option>
+                                <option value="CAR">Cartago</option>
+                                <option value="GUA">Guanacaste</option>
+                                <option value="ALA">Alajuela</option>
+                                <option value="Puntarenas">Puntarenas</option>
+                                <option value="HER">Heredia</option>
+                                <option value="LIM">Limón</option>
+                            </select>
+                        </div>
+
+                        <!---https://programando.paginasweb.cr/ejemplos/ubicaciones/-->
+
+                        <div class="form-group">
+                            <label for="Text">Lugar de estudio o trabajo</label>
+                            <input type="Text" class="form-control" id="workplace" placeholder=" " name="text">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="dispositivos">¿Con cuáles dispositivos electrónicos cóntas para conectarte a las
+                                sesiones?:</label>
+                            <select name="dispositivos" id="dispositivos">
+                                <option value="LAP">Laptop</option>
+                                <option value="Desk">Escritorio</option>
+                                <option value="Telefono">Dispostivo movil</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <table class="table table-bordered">
+                                <tr>
+                                    <td rowspan="3">¿Tienes una conexión estable a internet?</td>
+                                </tr>
+                                <tr>
+                                    <td><input type="radio" name="conn" value="yes"> Sí</td>
+                                    <td><input type="radio" name="conn" value="no"> No</td>
+                                </tr>
+                            </table>
+                        </div>
+
+                        <div class="form-group">
+                            <table class="table table-bordered">
+                                <tr>
+                                    <td rowspan="3">¿Tienes disponibiliad para conectarte a las sesiones de MenTe en
+                                        Acción?</td>
+                                    <!---Se incluyen las fechas-->
+                                </tr>
+                                <tr>
+                                    <td><input type="radio" name="dis" value="yes"> Sí</td>
+                                    <td><input type="radio" name="dis" value="no"> No</td>
+                                </tr>
+                            </table>
+                        </div>
+
+                        <div>
+                            <p>¿Por qué para vos esta beca es importante?: <textarea name="beca"></textarea></p>
+                        </div>
+
+                        <div>
+                            <p>¿Por qué querés ser una mujer en ciencia y tecnología?: <textarea name="beca"></textarea>
+                            </p>
+                        </div>
+
+                        <div>
+                            <p>¿Cuáles son tus intereses y pasatiempos?: <textarea name="beca"></textarea></p>
+                        </div>
+
+
+                        <button type="submit" class="btn btn-primary btn-success">Enviar</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>}}
