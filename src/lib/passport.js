@@ -6,54 +6,78 @@ const pool = require('../database')
 const helpers = require('../lib/helpers')
 
 
-passport.use('colab.login', new LocalStrategy({
+passport.use('local.login', new LocalStrategy({
     usernameField: 'username',
     passwordField: 'password',
-    passReqToCallback: true
+    passReqToCallback: true  //en este caso podriamos no ponerlo ya que no estamos guardando nada, pero por si se ocupara en un futuro, se pone
 }, async (req, username, password, done) => {
-    const rows = await pool.query('SELECT * FROM UsersColab WHERE username = ?', [username])
-    if (rows.length > 0) {
+    const rows = await pool.query('SELECT * FROM UsersMentes WHERE username = ?', [username])
+    if(rows.length > 0)
+    {
         const user = rows[0];
         const match = await helpers.matchPassword(password, user.password)
-        if (match == true) {
-            done(null, user, req.flash('alerta', 'Bienvenid@ ' + user.username))
+        if(match == true)
+        {
+            done(null,user, req.flash('alerta','Bienvenid@ ' + user.username))
         }
-        else {
-            done(null, false, req.flash('error', 'Contraseña invalida'))
+        else
+        {
+            done(null, false, req.flash('error','Contraseña invalida'))
         }
     }
-    else {
-        done(null, false, req.flash('error', 'Usuario no existe'))
+    else
+    {
+        done(null, false, req.flash('error','Usuario no existe'))
     }
 }))
 
-passport.use('local.signup', new LocalStrategy({
+passport.use('colab.login', new LocalStrategy({
     usernameField: 'username',
     passwordField: 'password',
-    passReqToCallback: true
+    passReqToCallback: true  //en este caso podriamos no ponerlo ya que no estamos guardando nada, pero por si se ocupara en un futuro, se pone
 }, async (req, username, password, done) => {
-    const { fullname } = req.body //importamos el fullname desde request body
-    const newUser = {
-        username,
-        password,
-        fullname
+    const rows = await pool.query('SELECT * FROM UsersColab WHERE username = ?', [username])
+    if(rows.length > 0)
+    {
+        const user = rows[0];
+        const match = await helpers.matchPassword(password, user.password)
+        if(match == true)
+        {
+            done(null,user, req.flash('alerta','Bienvenid@ ' + user.username))
+        }
+        else
+        {
+            done(null, false, req.flash('error','Contraseña invalida'))
+        }
     }
-    newUser.password = await helpers.encryptPassword(password)
-    try {
-        const result = await pool.query('INSERT INTO UsersColab SET ?', [newUser])
-        newUser.id = result.insertId
-        return done(null, newUser) //Devolvemos el newUser para almacenarlo en una sesion
-    } catch (error) {
-        return done(null, false, req.flash('error', 'Ya existe este usuario'))
+    else
+    {
+        done(null, false, req.flash('error','Usuario no existe'))
     }
 }))
+
+// passport.use('user.creation', new LocalStrategy({
+//     usernameField: 'username',
+//     passwordField: 'password',
+//     passReqToCallback: true
+// }, async (req, username, password, done) => {
+//     const {NewUser, password} = req.body
+
+// }))
+
 
 passport.serializeUser((user, done) => {
     done(null, user.username)
 
 }) //cuando serielizamos, guardamos el username del usuario
 
-passport.deserializeUser(async (username, done) => {
+passport.deserializeUser( async (username, done) =>{
+    const rows = await pool.query('SELECT * FROM UsersMentes WHERE username = ?', [username])
+    done(null, rows[0]) //estas consultas retornan un arreglo con el objeto, por ello el rows[0] para acceder al obj directamente
+}) //cuando deserializamos, tomamos ese id que se guardó para obtener los datos desde la BD
+
+
+passport.deserializeUser( async (username, done) =>{
     const rows = await pool.query('SELECT * FROM UsersColab WHERE username = ?', [username])
     done(null, rows[0])
 })

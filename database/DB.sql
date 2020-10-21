@@ -1,7 +1,26 @@
-CREATE DATABASE ATLAS_EN_ACCIONBASE;
+CREATE DATABASE ATLAS_EN_ACCION;
 
-USE ATLAS_EN_ACCIONBASE;
+USE ATLAS_EN_ACCION;
 
+--Users table
+CREATE TABLE UsersMentes
+(
+    username VARCHAR(255) NOT NULL,
+    password VARCHAR(255) NOT NULL,
+    PRIMARY KEY (username),
+    CONSTRAINT ApplicantIdentification FOREIGN KEY (username) REFERENCES MentesInfo(ApplicantIdentification)
+);
+
+CREATE TABLE UsersColab
+(
+    username VARCHAR(255) NOT NULL,
+    password VARCHAR(255) NOT NULL,
+    fullname VARCHAR(255) NOT NULL,
+    IsColab TINYINT(1) DEFAULT 1,
+    PRIMARY KEY (username)
+);
+
+--Applicants table
 
 CREATE TABLE Applicants
 (
@@ -86,29 +105,6 @@ CREATE TABLE MentesInfo
 
 );
 
-CREATE TABLE UsersMentes
-(
-    username VARCHAR(255) NOT NULL,
-    password VARCHAR(255) NOT NULL,
-    PRIMARY KEY (username),
-    CONSTRAINT ApplicantIdentification FOREIGN KEY (username) REFERENCES MentesInfo(ApplicantIdentification)
-);
 
-CREATE TABLE UsersColab
-(
-    username VARCHAR(255) NOT NULL,
-    password VARCHAR(255) NOT NULL,
-    fullname VARCHAR(255) NOT NULL,
-    IsColab TINYINT(1) DEFAULT 1,
-    PRIMARY KEY (username)
-);
-
-CREATE TABLE RegistroGraduadas
-(
-    GraduatedName VARCHAR(255),
-    GraduatedIdentification VARCHAR(255),
-    GraduatedPhone VARCHAR(255),
-    GraduatedEmail VARCHAR(255),
-    RegisteredPassword VARCHAR(255),
-    PRIMARY KEY(GraduatedIdentification)
-);
+-- ALTER TABLE users AUTO_INCREMENT = 2;
+-- DESCRIBE users; --imprime la tabla de como luce sus atributos

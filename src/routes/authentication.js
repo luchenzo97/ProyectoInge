@@ -25,21 +25,9 @@ router.get('/loginColab', logged.isNotLoggedIn, (req,res) => {
 router.post('/loginColab', logged.isNotLoggedIn, (req,res, next) => {
     passport.authenticate('colab.login', {
         successRedirect: '/profile',
-        failureRedirect: '/loginColab',
+        failureRedirect: '/login',
         failureFlash: true
     })(req, res, next) //Pasamos los objetos request, response y next (este ultimo por ser un middlewar)
-})
-
-router.get('/signupColab', logged.isNotLoggedIn, (req, res) => {
-    res.render('auth/signupColab')
-})
-
-router.post('/signupColab', logged.isNotLoggedIn, (req, res, next) => {
-    passport.authenticate('local.signup', {
-        successRedirect: '/profile',
-        failureRedirect: '/signupColab',
-        failureFlash: true
-    })(req, res, next)
 })
 
 router.get('/profile', logged.isLoggedIn, (req, res) => {

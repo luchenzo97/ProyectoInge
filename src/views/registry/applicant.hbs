@@ -96,7 +96,7 @@
                         <td>{{Applicant.ApplicantCondition}}</td>
                     </tr>
                     <tr>
-                        <th>Discapacitadad: </th>
+                        <th>Discapacidad: </th>
                         <td>{{Applicant.ApplicantConditionName}}</td>
                     </tr>
                     <tr>
@@ -149,8 +149,8 @@
                     </tr>
                 </table>
                 <br>
-                <a href="/registry/accept" class="btn btn-secondary">Aceptar</a>
-                <a href="/registry/applicant/delete/{{Applicant.id}}" class="btn btn-danger">Eliminar</a>
+                <a href="/registry/accept/{{Applicant.ApplicantIdentification}}" class="btn btn-secondary">Aceptar</a>
+                <a href="/registry/applicant/delete/{{Applicant.ApplicantIdentification}}" class="btn btn-danger">Eliminar</a>
                 
             </div>
 
