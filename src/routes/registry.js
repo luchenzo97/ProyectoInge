@@ -3,15 +3,15 @@
 const express = require('express')
 const router = express.Router()
 const pool = require('../database')
-const { isNotLoggedIn, isColab} = require('../lib/auth')
-const { generatePassword } = require('../lib/helpers')
+const { isNotLoggedIn, isColab } = require('../lib/auth')
+const { encryptPassword, generatePassword } = require('../lib/helpers')
 
 router.get('/apply', isNotLoggedIn, (req, res) => {
     res.render('registry/apply')
 })
 
 router.post('/apply', isNotLoggedIn, async (req, res) => {
-    
+
     const newApplicant = {
         ApplicantName: req.body.ApplicantName,
 
@@ -64,7 +64,7 @@ router.post('/apply', isNotLoggedIn, async (req, res) => {
         ApplicantConditionAssistance: req.body.ApplicantConditionAssistance,
 
         ApplicantMediaImpact: req.body.ApplicantMediaImpact,
-        
+
         ApplicantTry: req.body.ApplicantTry,
 
         ApplicantEmpleateCondition: req.body.ApplicantEmpleateCondition,
@@ -82,61 +82,57 @@ router.post('/apply', isNotLoggedIn, async (req, res) => {
         ApplicantParentPhone: req.body.ApplicantParentPhone,
 
         ApplicantParentEmail: req.body.ApplicantParentEmail,
-        
+
         ApplicantComments: req.body.ApplicantComments
-    } 
+    }
+    try{
     await pool.query('INSERT INTO Applicants set ?', [newApplicant])
     req.flash('alerta', 'Aplicación a Mente guardada correctamente')
+    }catch(e){
+        req.flash('error', 'No se pudo guardar su aplicación a Mente')
+    }
     res.redirect('../')
 })
 
 router.get('/applicationsList', isColab, async (req, res) => {
     const applicants = await pool.query('SELECT * FROM Applicants')
-    res.render('registry/applicationsList', {applicants})
+    res.render('registry/applicationsList', { applicants })
 })
 
-router.get('/applicant/:id', isColab, async (req,res) => {
+router.get('/applicant/:id', isColab, async (req, res) => {
     const { id } = req.params
     const Applicant = await pool.query('SELECT * FROM Applicants WHERE ApplicantIdentification = ?', [id])
-    const user = Applicant[0]
-    res.render('registry/applicant', {Applicant:Applicant[0]})
+    res.render('registry/applicant', { Applicant: Applicant[0] })
 })
 
 router.get('/applicant/delete/:id', isColab, async (req, res) => {
-    const { id } = req.params 
-    await pool.query('DELETE FROM Applicants WHERE ID = ?', [id])
+    const { ApplicantIdentification } = req.params
+    await pool.query('DELETE FROM Applicants WHERE ApplicantIdentification = ?', [ApplicantIdentification])
     req.flash('alerta', 'Aplicante eliminad@ correctamente')
-    res.redirect('/registry/applicationsList')
+    res.redirect('registry/applicationsList')
 })
 
 router.get('/accept/:id', isColab, async (req, res) => {
     const password = await generatePassword().then()
-    console.log(password)
-    req.flash('alerta', 'Contraseña: ' + password)
+    const { id } = req.params
+    const Applicant = await pool.query('SELECT * FROM Applicants WHERE ApplicantIdentification = ?', [id])
+    const NewUser = {
+        username: Applicant[0].ApplicantIdentification,
+        password
+    }
+    try {
+        await pool.query('INSERT INTO MentesInfo SET ?', [Applicant[0]])
+        NewUser.password = await encryptPassword(password)
+        await pool.query('INSERT INTO UsersMentes SET ?', [NewUser])
+        console.log(password)
+        req.flash('alerta', 'Contraseña: ' + password)
+    } catch (e) {
+        req.flash('error', 'Posible entrada duplicada, revisar el log')
+        console.log(e)
+    }
     res.redirect('/registry/applicationsList')
 })
 
-router.get('/signup', isNotLoggedIn, (req, res) => {
-    res.render('auth/signup')
-})
 
-router.post('/signup', isNotLoggedIn, async (req, res, next) => {
-    const newGraduated = {
-        GraduatedName: req.body.GraduatedName,
-        GraduatedIdentification: req.body.GraduatedIdentification,
-        GraduatedPhone: req.body.GraduatedPhone,
-        GraduatedEmail: req.body.GraduatedEmail,
-        RegisteredPassword: req.body.password
-    
-    } 
-    await pool.query('INSERT INTO RegistroGraduadas set ?', [newGraduated])
-    req.flash('alerta', 'Registro como Graduada Mente guardada correctamente')
-    res.redirect('../')
-})
-
-router.get('/graduatedList', isColab, async (req, res) => {
-    const graduated = await pool.query('SELECT * FROM RegistroGraduadas')
-    res.render('registry/graduatedList', {graduated})
-})
 
 module.exports = router
