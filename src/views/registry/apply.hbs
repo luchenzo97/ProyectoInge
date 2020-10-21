@@ -6,12 +6,21 @@
             <h1>Formulario de Inscripcion MenTe</h1>
             <p> Este es el formulario de inscripción para ser la potencial ganadora de uno de las 50 becas asignados
                 para el
-                programa Mente en Acción (Mujeres en Ciencia y Tecnología). Favor sólo llenar el formulario si se cumple
-                con
-                los siguientes requisitos:
-                1. Mujer entre los 15 y 19 años de edad.
-                2. Disponibilidad para asistir a los talleres los sábados a partir del día de mes hasta el día de mes.
-                3. 100 % comprometida y con ganas de aprender.
+                programa Mente en Acción (Mujeres en Ciencia y Tecnología). 
+                <br>
+                <b>Favor sólo llenar el formulario si se cumple
+                con los siguientes requisitos:</b>
+                <ul>
+                    <li>
+                        Mujer entre los 15 y 19 años de edad.
+                    </li>
+                    <li>
+                        Disponibilidad para asistir a los talleres los sábados a partir del día de mes hasta el día de mes.
+                    </li>
+                    <li>
+                        100 % comprometida y con ganas de aprender.
+                    </li>
+                </ul>
                 Para poder graduarte del programa, en caso de ser seleccionada únicamente podrás faltar dos veces.
                 * El plazo de inscripción cierra el día de mes.
                 ¿ Querés ver cómo es el programa? Podés ver el video aquí:</p>
@@ -29,39 +38,39 @@
 
                 <div class="form-group">
                     <label for="ApplicantIdentification">Identificación<span class="required">*</span></label>
-                    <input type="Text" class="form-control" id="ApplicantIdentification" placeholder="Numero de Cedula"
-                        name="ApplicantIdentification" required>
+                    <input required title="Este campo es requerido" type="Text" class="form-control" id="ApplicantIdentification" placeholder="Numero de Cedula"
+                        name="ApplicantIdentification">
                 </div>
 
                 <div class="form-group">
                     <label for="ApplicantPhone">Teléfono<span class="required">*</span></label>
-                    <input type="tel" class="form-control" id="ApplicantPhone" placeholder="Numero de Telefono"
-                        name="ApplicantPhone" required>
+                    <input required title="Este campo es requerido" type="tel" class="form-control" id="ApplicantPhone" placeholder="Numero de Telefono"
+                        name="ApplicantPhone">
                 </div>
 
                 <div class="form-group">
                     <label for="ApplicantEmail">Correo electrónico:<span class="required">*</span></label>
-                    <p>Verificar que es un correo activo y revisar la ortografía del mismo, debido a que es el medio de
-                        comunicación que utilizaremos </p>
-                    <input type="email" class="form-control" id="ApplicantEmail" placeholder="Email"
+                    <p><b>Verificar que es un correo activo y revisar la ortografía del mismo, debido a que es el medio de
+                        comunicación que utilizaremos</b></p>
+                    <input required title="Este campo es requerido" type="email" class="form-control" id="ApplicantEmail" placeholder="Email"
                         name="ApplicantEmail">
                 </div>
 
                 <div class="form-group">
                     <label for="ApplicantBirthDate">Fecha de nacimiento:<span class="required">*</span></label>
-                    <input type="dt" class="form-control" id="ApplicantBirthDate" placeholder="dd/mm/aaaa"
-                        name="ApplicantBirthDate" required>
+                    <input required title="Este campo es requerido" type="dt" class="form-control" id="ApplicantBirthDate" placeholder="dd/mm/aaaa"
+                        name="ApplicantBirthDate">
                 </div>
 
                 <div class="form-group">
                     <label for="ApplicantAge">Edad exacta (años y meses):<span class="required">*</span></label>
-                    <input type="text" class="form-control" id="ApplicantAge" placeholder="dd/mm/aaaa"
-                        name="ApplicantAge" required>
+                    <input required title="Este campo es requerido" type="text" class="form-control" id="ApplicantAge" placeholder="dd/mm/aaaa"
+                        name="ApplicantAge">
                 </div>
 
                 <div class="form-group">
                     <label for="ApplicantProvince">Provincia:<span class="required">*</span></label>
-                    <select name="ApplicantProvince" id="ApplicantProvince">
+                    <select required title="Este campo es requerido" name="ApplicantProvince" id="ApplicantProvince">
                         <option value="San José">San José</option>
                         <option value="Cartago">Cartago</option>
                         <option value="Guanacaste">Guanacaste</option>
@@ -94,19 +103,19 @@
 
                 <div class="form-group">
                     <label for="ApplicantCanton">Cantón:<span class="required">*</span></label>
-                    <input type="dt" class="form-control" id="ApplicantCanton" placeholder="dd/mm/aaaa"
-                        name="ApplicantCanton" required>
+                    <input required title="Este campo es requerido" type="dt" class="form-control" id="ApplicantCanton" placeholder="dd/mm/aaaa"
+                        name="ApplicantCanton">
                 </div>
 
                 <div class="form-group">
                     <label for="ApplicantDistrict">Distrito:<span class="required">*</span></label>
-                    <input type="dt" class="form-control" id="ApplicantDistrict" placeholder="dd/mm/aaaa"
-                        name="ApplicantDistrict" required>
+                    <input required title="Este campo es requerido" type="dt" class="form-control" id="ApplicantDistrict" placeholder="dd/mm/aaaa"
+                        name="ApplicantDistrict">
                 </div>
 
                 <div class="form-group">
                     <label for="Text">Ocupación actual<span class="required">*</span></label>
-                    <select name="ApplicantOcupation" id="ApplicantOcupation" required>
+                    <select required title="Este campo es requerido" name="ApplicantOcupation" id="ApplicantOcupation">
                         <option value="Estudiante de colegio">Estudiante de colegio</option>
                         <option value="Estudiante de univesidad">Estudiante de univesidad</option>
                         <option value="Estoy Trabajando">Estoy Trabajando</option>
@@ -119,7 +128,7 @@
                     <p>Si eres estudiante indica el año en que entraste a la institución educativa (Universidad), o
                         grado actual (Colegio).
                         En caso de estar trabajando indicar el puesto actual</p>
-                    <input type="Text" class="form-control" id="ApplicantOcupationPlace"
+                    <input required title="Este campo es requerido" type="Text" class="form-control" id="ApplicantOcupationPlace"
                         placeholder="Lugar de estudio o trabajo" name="ApplicantOcupationPlace">
                 </div>
 
@@ -129,7 +138,7 @@
                             <th rowspan="3">Nivel de inglés<span class="required">*</span></th>
                         </tr>
                         <tr>
-                            <td><input type="radio" name="ApplicantEnglishLevel" value="Básico">Básico</td>
+                            <td><input required title="Este campo es requerido" type="radio" name="ApplicantEnglishLevel" value="Básico">Básico</td>
                             <td><input type="radio" name="ApplicantEnglishLevel" value="Intermedio">Intermedio</td>
                             <td><input type="radio" name="ApplicantEnglishLevel" value="Avanzado">Avanzado</td>
                         </tr>
@@ -137,10 +146,10 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="ApplicantDevices">¿Con cuáles dispositivos electrónicos cóntas para conectarte a
+                    <label for="ApplicantDevices">¿Con cuáles dispositivos electrónicos contás para conectarte a
                         las
                         sesiones?:<span class="required">*</span></label>
-                    <select name="ApplicantDevices" id="ApplicantDevices">
+                    <select required title="Este campo es requerido" name="ApplicantDevices" id="ApplicantDevices">
                         <option value="Laptop">Laptop</option>
                         <option value="Escritorio">Escritorio</option>
                         <option value="Dispostivo movil">Dispostivo movil</option>
@@ -153,7 +162,7 @@
                             <th rowspan="3">¿Tienes una conexión estable a internet?<span class="required">*</span></th>
                         </tr>
                         <tr>
-                            <td><input type="radio" name="ApplicantConnection" value="Sí, tengo Wi-Fi en mi casa"> Sí,
+                            <td><input required title="Este campo es requerido" type="radio" name="ApplicantConnection" value="Sí, tengo Wi-Fi en mi casa"> Sí,
                                 tengo Wi-Fi en mi
                                 casa</td>
                             <td><input type="radio" name="ApplicantConnection"
@@ -175,58 +184,58 @@
                             <!---Se incluyen las fechas-->
                         </tr>
                         <tr>
-                            <td><input type="radio" name="ApplicantAvailability" value="Sí"> Sí</td>
+                            <td><input required title="Este campo es requerido" type="radio" name="ApplicantAvailability" value="Sí"> Sí</td>
                             <td><input type="radio" name="ApplicantAvailability" value="No"> No</td>
                         </tr>
                     </table>
                 </div>
 
                 <div class="form-group">
-                    <p>Cuentanos sobre ti:<span class="required">*</span></p>
-                    <textarea rows=8 name="ApplicantAbout" required></textarea></p>
+                    <p>Cuéntanos sobre ti:<span class="required">*</span></p>
+                    <textarea required title="Este campo es requerido" rows=8 name="ApplicantAbout"></textarea></p>
                 </div>
 
                 <div class="form-group">
                     <p>¿Cuáles son las carreras/especialidades que te llaman la atención?:<span
                             class="required">*</span></p>
-                    <textarea rows=8 name="ApplicantAspiration" required></textarea>
+                    <textarea required title="Este campo es requerido" rows=8 name="ApplicantAspiration"></textarea>
                 </div>
 
                 <div class="form-group">
                     <p>¿Cuáles son tus intereses y pasatiempos?:<span class="required">*</span></p>
-                    <textarea rows=8 name="ApplicantHobbies" required></textarea>
+                    <textarea required title="Este campo es requerido" rows=8 name="ApplicantHobbies"></textarea>
                 </div>
 
                 <div class="form-group">
                     <p>¿Por qué para vos esta beca es importante?:<span class="required">*</span></p>
-                    <textarea rows=8 name="ApplicantDescription" required></textarea>
+                    <textarea required title="Este campo es requerido" rows=8 name="ApplicantDescription"></textarea>
                 </div>
 
 
                 <div class="form-group">
                     <p>¿Qué es lo que esperas aprender en el programa?:<span class="required">*</span></p>
-                    <textarea rows=8 name="ApplicantExpectation" required></textarea>
+                    <textarea required title="Este campo es requerido" rows=8 name="ApplicantExpectation"></textarea>
 
                 </div>
 
                 <div class="form-group">
-                    <p>¿Comó a través de la ciencia y tecnología impatarías a la sociedad costarricense?:<span
+                    <p>¿Comó, a través de la ciencia y tecnología, impactarías a la sociedad costarricense?:<span
                             class="required">*</span></p>
-                    <textarea rows=8 name="ApplicantImpact" required></textarea>
+                    <textarea required title="Este campo es requerido" rows=8 name="ApplicantImpact"></textarea>
                 </div>
 
                 <div class="form-group">
                     <p>¿Por qué querés ser una mujer en ciencia y tecnología?:<span class="required">*</span></p>
-                    <textarea rows=8 name="ApplicantWomenInSTEM"></textarea>
+                    <textarea required title="Este campo es requerido" rows=8 name="ApplicantWomenInSTEM"></textarea>
                 </div>
 
                 <div class="form-group">
                     <table class="FormTable">
                         <tr>
-                            <th rowspan="3">¿Tienes alguna discapacidad?<span class="required">*</span></th>
+                            <th rowspan="3">¿Tenés alguna discapacidad?<span class="required">*</span></th>
                         </tr>
                         <tr>
-                            <td><input type="radio" name="ApplicantCondition" value="Sí"> Sí</td>
+                            <td><input required title="Este campo es requerido" type="radio" name="ApplicantCondition" value="Sí"> Sí</td>
                             <td><input type="radio" name="ApplicantCondition" value="No"> No</td>
                         </tr>
                     </table>
@@ -244,12 +253,12 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="Text">¿Comó te entraste del programa?<span class="required">*</span></label>
-                    <select name="ApplicantMediaImpact" id="ApplicantMediaImpact" required>
+                    <label for="Text">¿Comó te enteraste del programa?<span class="required">*</span></label>
+                    <select required title="Este campo es requerido" name="ApplicantMediaImpact" id="ApplicantMediaImpact">
                         <option value="Redes sociales de Ideas en Acción">Redes sociales de Ideas en Acción</option>
-                        <option value="Periodico">Periodico</option>
+                        <option value="Periodico">Periódico</option>
                         <option value="Amistades">Amistades</option>
-                        <option value="Parque la Libertad">Parque la Libertad</option>
+                        <option value="Parque la Libertad">Parque La Libertad</option>
                         <option value="Egresadas del programa">Egresadas del programa</option>
                     </select>
                 </div>
@@ -260,7 +269,7 @@
                             <th rowspan="3">¿Has aplicado anteiormente?<span class="required">*</span></th>
                         </tr>
                         <tr>
-                            <td><input type="radio" name="ApplicantTry" value="Sí"> Sí</td>
+                            <td><input required title="Este campo es requerido" type="radio" name="ApplicantTry" value="Sí"> Sí</td>
                             <td><input type="radio" name="ApplicantTry" value="No"> No</td>
                         </tr>
                     </table>
@@ -272,7 +281,7 @@
                             <th rowspan="3">¿Tenés apoyo de la beca Empleate?<span class="required">*</span></th>
                         </tr>
                         <tr>
-                            <td><input type="radio" name="ApplicantEmpleateCondition" value="Sí"> Sí</td>
+                            <td><input required title="Este campo es requerido" type="radio" name="ApplicantEmpleateCondition" value="Sí"> Sí</td>
                             <td><input type="radio" name="ApplicantEmpleateCondition" value="No"> No</td>
                         </tr>
                     </table>
@@ -288,7 +297,7 @@
                                 Avancemos
                                 por más</td>
                             <td><input type="radio" name="ApplicantEmpleateConditionName" value="Xmí (Por mí)"> Xmí (Por
-                                mi)</td>
+                                mí)</td>
                             <td><input type="radio" name="ApplicantEmpleateConditionName" value="Empleate inclusivo">
                                 Empleate
                                 inclusivo</td>
@@ -303,7 +312,7 @@
                                 en el programa?<span class="required">*</span></th>
                         </tr>
                         <tr>
-                            <td><input type="radio" name="ApplicantEconomicStatus"
+                            <td><input required title="Este campo es requerido" type="radio" name="ApplicantEconomicStatus"
                                     value="No, mi familia no tiene posibilidad de pagar, necesitaría la beca total de participación">
                                 No, mi familia no tiene posibilidad de pagar, necesitaría la beca total de participación
                             </td>
@@ -314,8 +323,8 @@
                                     value="Sí, con un aporte de 50,000 colones"> Sí, con un aporte de 50,000 colones
                             </td>
                             <td><input type="radio" name="ApplicantEconomicStatus"
-                                    value="Sí, con otro aporte, especificar en comentarios"> Sí, con otro aporte,
-                                especificar en comentarios</td>
+                                    value="Sí, con otro aporte, especificar en comentarios"> Sí, con otro aporte
+                                (<b>especificar en comentarios</b>)</td>
                         </tr>
                     </table>
                 </div>
@@ -326,7 +335,7 @@
                             <th rowspan="3">¿Qué talla de blusa sos?<span class="required">*</span></th>
                         </tr>
                         <tr>
-                            <td><input type="radio" name="ApplicantTshirt" value="XS">XS</td>
+                            <td><input required title="Este campo es requerido" type="radio" name="ApplicantTshirt" value="XS">XS</td>
                             <td><input type="radio" name="ApplicantTshirt" value="S">S</td>
                             <td><input type="radio" name="ApplicantTshirt" value="M">M</td>
                             <td><input type="radio" name="ApplicantTshirt" value="L">L</td>
@@ -353,21 +362,21 @@
                     <label for="ApplicantParentName">Nombre Completo de papá/mamá o encargado/encargada
                         legal:<span class="required">*</span></label>
                     <input type="Text" class="form-control" id="ApplicantParentName" placeholder="Nombre Completo"
-                        name="ApplicantParentName" required>
+                        name="ApplicantParentName">
                 </div>
 
                 <div class="form-group">
                     <label for="ApplicantParentPhone">Teléfono de papá/mamá o encargado/encargada legal:<span
                             class="required">*</span></label>
                     <input type="tel" class="form-control" id="ApplicantParentPhone" placeholder="Numero de Telefono"
-                        name="ApplicantParentPhone" required>
+                        name="ApplicantParentPhone">
                 </div>
 
                 <div class="form-group">
                     <label for="ApplicantParentEmail">Correo electrónico de papá/mamá o encargado/encargada
                         legal:<span class="required">*</span></label>
-                    <p>Verificar que es un correo activo y revisar la ortografía del mismo, debido a que es el
-                        medio de comunicación que utilizaremos </p>
+                    <p><b>Verificar que es un correo activo y revisar la ortografía del mismo, debido a que es el
+                        medio de comunicación que utilizaremos</b></p>
                     <input type="email" class="form-control" id="ApplicantParentEmail" placeholder="Email"
                         name="ApplicantParentEmail">
                 </div>

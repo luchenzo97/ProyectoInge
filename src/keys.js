@@ -4,7 +4,7 @@ module.exports = {
     database: {
         host: 'localhost',
         user: 'root',
-        password: 'root123',
+        password: 'toor',
         database: 'ATLAS_EN_ACCION',
         insecureAuth: true
     }

@@ -16,10 +16,6 @@
             <li class="nav-item">
               <a class="nav-link" href="/registry/applicationsList">Aplicantes</a>
             </li>
-
-            <li class="nav-item">
-              <a class="nav-link" href="/registry/GraduatedList">Registro Graduadas</a>
-            </li>
           {{/if}}
 
         <li class="nav-item">
@@ -32,30 +28,20 @@
         
         {{else}}
         
-        <li class="nav-item">
-          <a class="nav-link" href="/loginColab">Log In</a>
-        </li>
-
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
             aria-haspopup="true" aria-expanded="false">
-            Programa MenTe en Acción
+            Login
           </a>
           <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <a class="dropdown-item" href="/registry/apply">Aplicar a MenTe</a>
+            <a class="dropdown-item" href="/login">MenTe</a>
             <div class="dropdown-divider"></div>
-            <a class="dropdown-item" href="/registry/signup">Resistrarme como egresada MenTe</a>
+            <a class="dropdown-item" href="/loginColab">Colaborador</a>
           </div>
         </li>
 
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
-            aria-haspopup="true" aria-expanded="false">
-            TESTING
-          </a>
-          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <a class="dropdown-item" href="/signupColab">Crear usuario colaborador de testing</a>
-          </div>
+        <li class="nav-item">
+          <a class="nav-link" href="/registry/apply">Aplicar a MenTe</a>
         </li>
         
         {{/if}}
