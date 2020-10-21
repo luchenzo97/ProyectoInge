@@ -1,5 +1,5 @@
 //Este archivo contendrá parablas claves para iniciar servicios
-
+//Comentarios de prueba para hacer un merge al master
 module.exports = {
     database: {
         host: 'localhost',
