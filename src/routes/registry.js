@@ -3,8 +3,9 @@
 const express = require('express')
 const router = express.Router()
 const pool = require('../database')
+const passport = require('passport') //Temporal
 const { isNotLoggedIn, isColab } = require('../lib/auth')
-const { encryptPassword, generatePassword } = require('../lib/helpers')
+const { generatePassword, encryptPassword } = require('../lib/helpers')
 
 router.get('/apply', isNotLoggedIn, (req, res) => {
     res.render('registry/apply')
@@ -85,12 +86,8 @@ router.post('/apply', isNotLoggedIn, async (req, res) => {
 
         ApplicantComments: req.body.ApplicantComments
     }
-    try{
     await pool.query('INSERT INTO Applicants set ?', [newApplicant])
     req.flash('alerta', 'Aplicación a Mente guardada correctamente')
-    }catch(e){
-        req.flash('error', 'No se pudo guardar su aplicación a Mente')
-    }
     res.redirect('../')
 })
 
@@ -102,37 +99,124 @@ router.get('/applicationsList', isColab, async (req, res) => {
 router.get('/applicant/:id', isColab, async (req, res) => {
     const { id } = req.params
     const Applicant = await pool.query('SELECT * FROM Applicants WHERE ApplicantIdentification = ?', [id])
+    const user = Applicant[0]
     res.render('registry/applicant', { Applicant: Applicant[0] })
 })
 
 router.get('/applicant/delete/:id', isColab, async (req, res) => {
-    const { ApplicantIdentification } = req.params
-    await pool.query('DELETE FROM Applicants WHERE ApplicantIdentification = ?', [ApplicantIdentification])
-    req.flash('alerta', 'Aplicante eliminad@ correctamente')
-    res.redirect('registry/applicationsList')
-})
-
-router.get('/accept/:id', isColab, async (req, res) => {
-    const password = await generatePassword().then()
     const { id } = req.params
-    const Applicant = await pool.query('SELECT * FROM Applicants WHERE ApplicantIdentification = ?', [id])
-    const NewUser = {
-        username: Applicant[0].ApplicantIdentification,
-        password
-    }
-    try {
-        await pool.query('INSERT INTO MentesInfo SET ?', [Applicant[0]])
-        NewUser.password = await encryptPassword(password)
-        await pool.query('INSERT INTO UsersMentes SET ?', [NewUser])
-        console.log(password)
-        req.flash('alerta', 'Contraseña: ' + password)
-    } catch (e) {
-        req.flash('error', 'Posible entrada duplicada, revisar el log')
-        console.log(e)
-    }
+    await pool.query('DELETE FROM Applicants WHERE ID = ?', [id])
+    req.flash('alerta', 'Aplicante eliminad@ correctamente')
     res.redirect('/registry/applicationsList')
 })
 
+router.get('/accept/:id', isColab, async (req, res) => {
+    const { id } = req.params
+    const applicant = await pool.query('SELECT * FROM Applicants WHERE ApplicantIdentification = ?', [id])
+    const newProfile = {
+        Name: applicant[0].ApplicantName,
+        Identification: applicant[0].ApplicantIdentification,
+        Phone: applicant[0].ApplicantPhone,
+        Email: applicant[0].ApplicantEmail,
+        Age: applicant[0].ApplicantAge
+    }
+    try {
+        await pool.query('INSERT INTO ProfileInfo set ?', [newProfile]) //Aca entraria a la lista de espera para ser aceptado
+    }
+    catch (error) {
 
+    }
+    //Esto va en authentication pero es hasta que se acepte
+    const password = await generatePassword().then()
+    const newUser = {
+        username: newProfile.Identification,
+        password
+    }
+    newUser.password = await encryptPassword(password)
+    console.log(password)
+    try {
+        await pool.query('INSERT INTO Users SET ?', [newUser])
+        req.flash('alerta', 'Registro guardado correctamente')
+        res.redirect('./')
+    } catch (error) {
+        req.flash('error', 'Ya existe este usuario')
+        console.log(error)
+        res.redirect('./')
+    }
+
+
+    req.flash('alerta', 'Contraseña: ' + password)
+    res.redirect('/registry/applicationsList')
+})
+
+router.get('/signup', isNotLoggedIn, (req, res) => {
+    res.render('auth/signup')
+})
+
+router.post('/signup', isNotLoggedIn, async (req, res, next) => {
+    const newGraduated = {
+        GraduatedName: req.body.GraduatedName,
+        GraduatedIdentification: req.body.GraduatedIdentification,
+        GraduatedPhone: req.body.GraduatedPhone,
+        GraduatedEmail: req.body.GraduatedEmail,
+        RegisteredPassword: req.body.password
+
+    }
+    await pool.query('INSERT INTO RegistroGraduadas set ?', [newGraduated])
+    req.flash('alerta', 'Registro como Graduada Mente guardada correctamente')
+    res.redirect('../')
+})
+
+router.get('/signupColab', isNotLoggedIn, (req, res) => {
+    res.render('auth/signupColab')
+})
+
+// router.post('/signupColab', logged.isNotLoggedIn, (req, res, next) => {
+//     passport.authenticate('local.signup', {
+//         successRedirect: '/profile',
+//         failureRedirect: '/signupColab',
+//         failureFlash: true
+//     })(req, res, next)
+// })
+
+router.post('/signupColab', isNotLoggedIn, async (req, res, next) => {
+    const temp = req.body
+    const newProfile = {
+        Name: temp.fullname,
+        Identification: temp.identification,
+        Phone: temp.phone,
+        Email: temp.email,
+        Age: temp.age
+    }
+    await pool.query('INSERT INTO ProfileInfo set ?', [newProfile]) //Aca entraria a la lista de espera para ser aceptado
+
+    //Esto va en authentication pero es hasta que se acepte
+    const password = await generatePassword().then()
+    const newUser = {
+        username: temp.identification,
+        password
+    }
+    newUser.password = await encryptPassword(password)
+    console.log(password)
+    try {
+        await pool.query('INSERT INTO Users SET ?', [newUser])
+        const Colabname = {
+            colabname: newUser.username
+        }
+        await pool.query('INSERT INTO RolColab SET ?', [Colabname])
+        req.flash('alerta', 'Registro guardado correctamente')
+        res.redirect('../')
+    } catch (error) {
+        req.flash('error', 'Ya existe este usuario')
+        console.log(error)
+        res.redirect('../')
+    }
+
+})
+
+router.get('/graduatedList', isColab, async (req, res) => {
+    const graduated = await pool.query('SELECT * FROM RegistroGraduadas')
+    res.render('registry/graduatedList', { graduated })
+})
 
 module.exports = router

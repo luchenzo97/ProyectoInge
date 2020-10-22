@@ -1,3 +1,5 @@
+const pool = require('../database')
+
 module.exports = {
     isLoggedIn(req, res, next) {
         if (req.isAuthenticated()) //si la sesion existe (usuario logeado)
@@ -17,7 +19,8 @@ module.exports = {
 
     isColab(req, res, next) {
         if (req.isAuthenticated()) {
-            if (req.user.IsColab) {
+            if(req.user.rolColab)
+            {
                 return next()
             }
             return res.redirect('/profile')

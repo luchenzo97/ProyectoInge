@@ -6,78 +6,85 @@ const pool = require('../database')
 const helpers = require('../lib/helpers')
 
 
-passport.use('local.login', new LocalStrategy({
-    usernameField: 'username',
-    passwordField: 'password',
-    passReqToCallback: true  //en este caso podriamos no ponerlo ya que no estamos guardando nada, pero por si se ocupara en un futuro, se pone
-}, async (req, username, password, done) => {
-    const rows = await pool.query('SELECT * FROM UsersMentes WHERE username = ?', [username])
-    if(rows.length > 0)
-    {
-        const user = rows[0];
-        const match = await helpers.matchPassword(password, user.password)
-        if(match == true)
-        {
-            done(null,user, req.flash('alerta','Bienvenid@ ' + user.username))
-        }
-        else
-        {
-            done(null, false, req.flash('error','Contraseña invalida'))
-        }
-    }
-    else
-    {
-        done(null, false, req.flash('error','Usuario no existe'))
-    }
-}))
-
 passport.use('colab.login', new LocalStrategy({
     usernameField: 'username',
     passwordField: 'password',
-    passReqToCallback: true  //en este caso podriamos no ponerlo ya que no estamos guardando nada, pero por si se ocupara en un futuro, se pone
+    passReqToCallback: true
 }, async (req, username, password, done) => {
-    const rows = await pool.query('SELECT * FROM UsersColab WHERE username = ?', [username])
-    if(rows.length > 0)
-    {
+    const rows = await pool.query('SELECT * FROM Users WHERE username = ?', [username])
+    if (rows.length > 0) {
         const user = rows[0];
-        const match = await helpers.matchPassword(password, user.password)
-        if(match == true)
-        {
-            done(null,user, req.flash('alerta','Bienvenid@ ' + user.username))
+        const match = await helpers.matchPassword(password, user.Password)
+        if (match == true) {
+            done(null, user)
         }
-        else
-        {
-            done(null, false, req.flash('error','Contraseña invalida'))
+        else {
+            done(null, false, req.flash('error', 'Contraseña invalida'))
         }
     }
-    else
-    {
-        done(null, false, req.flash('error','Usuario no existe'))
+    else {
+        done(null, false, req.flash('error', 'Usuario no existe'))
     }
 }))
 
-// passport.use('user.creation', new LocalStrategy({
-//     usernameField: 'username',
+// passport.use('local.signup', new LocalStrategy({
+//     usernameField: 'identification',
 //     passwordField: 'password',
 //     passReqToCallback: true
-// }, async (req, username, password, done) => {
-//     const {NewUser, password} = req.body
-
+// }, async (req, done) => {
+//     const temp = req.body //importamos el fullname desde request body
+//     const password = await generatePassword().then()
+//     const newUser = {
+//         username: temp.identification,
+//         password 
+//     }
+//     newUser.password = await helpers.encryptPassword(password)
+//     console.log(password)
+//     try {
+//         await pool.query('INSERT INTO Users SET ?', [newUser])
+//         await pool.query('INSERT INTO RolColab SET ?', [newUser.username])
+//         return done(null, false, req.flash('alerta', 'Registro guardado correctamente'))
+//     } catch (error) {
+//         return done(null, false, req.flash('error', 'Ya existe este usuario'))
+//     }
 // }))
 
-
 passport.serializeUser((user, done) => {
-    done(null, user.username)
+    done(null, user.Username)
 
 }) //cuando serielizamos, guardamos el username del usuario
 
-passport.deserializeUser( async (username, done) =>{
-    const rows = await pool.query('SELECT * FROM UsersMentes WHERE username = ?', [username])
-    done(null, rows[0]) //estas consultas retornan un arreglo con el objeto, por ello el rows[0] para acceder al obj directamente
-}) //cuando deserializamos, tomamos ese id que se guardó para obtener los datos desde la BD
+passport.deserializeUser(async (username, done) => {
+    const rows = await pool.query('SELECT * FROM Users RIGHT JOIN ProfileInfo ON Users.Username = ProfileInfo.Identification WHERE username = ?', [username])
+    var rolAdmin
+    var rolColab 
+    var rol = await pool.query('SELECT * FROM RolAdmin WHERE Adminame = ?', [username])
+    if(rol[0] != null)
+    {
+        rolAdmin = true;
+    }
+    else
+    {
+        rolAdmin = false;
+    }
+    rol = await pool.query('SELECT * FROM RolColab WHERE Colabname = ?', [username])
+    if(rol[0] != null)
+    {
+        rolColab = true;
+    }
+    else
+    {
+        rolColab = false;
+    }
 
-
-passport.deserializeUser( async (username, done) =>{
-    const rows = await pool.query('SELECT * FROM UsersColab WHERE username = ?', [username])
-    done(null, rows[0])
+    const user = {
+        Username: rows[0].Identification,
+        Name: rows[0].Name,
+        Identification: rows[0].Identification,
+        Phone: rows[0].Phone,
+        Email: rows[0].Email,
+        rolAdmin,
+        rolColab
+    }
+        done(null, user)
 })
