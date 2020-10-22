@@ -2,25 +2,6 @@ CREATE DATABASE ATLAS_EN_ACCION;
 
 USE ATLAS_EN_ACCION;
 
---Users table
-CREATE TABLE UsersMentes
-(
-    username VARCHAR(255) NOT NULL,
-    password VARCHAR(255) NOT NULL,
-    PRIMARY KEY (username),
-    CONSTRAINT ApplicantIdentification FOREIGN KEY (username) REFERENCES MentesInfo(ApplicantIdentification)
-);
-
-CREATE TABLE UsersColab
-(
-    username VARCHAR(255) NOT NULL,
-    password VARCHAR(255) NOT NULL,
-    fullname VARCHAR(255) NOT NULL,
-    IsColab TINYINT(1) DEFAULT 1,
-    PRIMARY KEY (username)
-);
-
---Applicants table
 
 CREATE TABLE Applicants
 (
@@ -60,10 +41,11 @@ CREATE TABLE Applicants
     ApplicantParentPhone VARCHAR(255),
     ApplicantParentEmail VARCHAR(255),
     ApplicantComments TEXT,
+    Accepted TINYINT(1) DEFAULT 0,
     PRIMARY KEY(ApplicantIdentification)
 );
 
-CREATE TABLE MentesInfo
+/*CREATE TABLE MentesInfo
 (
     ApplicantName VARCHAR(255),
     ApplicantIdentification VARCHAR(255),
@@ -101,10 +83,40 @@ CREATE TABLE MentesInfo
     ApplicantParentPhone VARCHAR(255),
     ApplicantParentEmail VARCHAR(255),
     ApplicantComments TEXT,
+    Accepted TINYINT(1) DEFAULT 0,
     PRIMARY KEY(ApplicantIdentification)
 
+); */
+
+/* Relación entre tabla de PerfilInfo y Users */
+CREATE TABLE ProfileInfo
+(
+    Name VARCHAR(255),
+    Identification VARCHAR(255),
+    Phone VARCHAR(255),
+    Email VARCHAR(255),
+    Age VARCHAR(255),
+    PRIMARY KEY(Identification)
 );
 
+CREATE TABLE Users
+(
+    Username VARCHAR(255),
+    Password VARCHAR(255),
+    PRIMARY KEY(Username),
+    CONSTRAINT Username FOREIGN KEY (Username) REFERENCES ProfileInfo(Identification)
+);
 
--- ALTER TABLE users AUTO_INCREMENT = 2;
--- DESCRIBE users; --imprime la tabla de como luce sus atributos
+CREATE TABLE RolAdmin
+(
+    Adminame VARCHAR(255),
+    PRIMARY KEY(Adminame),
+    CONSTRAINT Adminame FOREIGN KEY (Adminame) REFERENCES Users(Username)
+);
+
+CREATE TABLE RolColab
+(
+    Colabname VARCHAR(255),
+    PRIMARY KEY(Colabname),
+    CONSTRAINT Colabname FOREIGN KEY (Colabname) REFERENCES Users(Username)
+);

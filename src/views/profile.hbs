@@ -1,9 +1,155 @@
+<!-- Vista de Perfil de Usuario -->
 <div class="container p-4">
-    <div class="row">
-        <div class="col-md-4 mx-auto">
-            <div class="card text-center">
-                <div class="card-body">
-                    <h3>{{user.fullname}}</h3>
+    <div class="card">
+        <div class="container bootstrap snippets bootdey">
+            <div class="panel-body inf-content">
+                <div class="row">
+                    <div class="col-md-5 m-4">
+                        <h3 class="text-center">Mi Perfil MenTe</h3><br>
+                        <div class="table-responsive">
+                            <table class="table table-user-information">
+                                <tbody>
+                                    <tr>
+                                        <td>
+                                            <strong>
+                                                <span class="glyphicon glyphicon-asterisk text-primary"></span>
+                                                Nombre:
+                                            </strong>
+                                        </td>
+                                        <td class="text-primary">
+                                            {{user.Name}}
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <strong>
+                                                <span class="glyphicon glyphicon-user  text-primary"></span>
+                                                Telefóno:
+                                            </strong>
+                                        </td>
+                                        <td class="text-primary">
+                                            <input class="form-control" name="Phone" placeholder={{user.Phone}}>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <strong>
+                                                <span class="glyphicon glyphicon-cloud text-primary"></span>
+                                                Email:
+                                            </strong>
+                                        </td>
+                                        <td class="text-primary">
+                                            <input class="form-control" placeholder={{user.Email}}>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <strong>
+                                                <span class="glyphicon glyphicon-cloud text-primary"></span>
+                                                Fecha de Nacimiento:
+                                            </strong>
+                                        </td>
+                                        <td class="text-primary">
+                                            <input class="form-control" type="date" id="birthday" placeholder="25/05/1997">
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <strong>
+                                                <span class="glyphicon glyphicon-bookmark text-primary"></span>
+                                                Provincia:
+                                            </strong>
+                                        </td>
+                                        <td class="text-primary">
+                                            <select required class="form-control" name="ApplicantProvince" id="ApplicantProvince" placeholder="San José">
+                                                <option value="San José">San José</option>
+                                                <option value="Cartago">Cartago</option>
+                                                <option value="Guanacaste">Guanacaste</option>
+                                                <option value="Alajuela">Alajuela</option>
+                                                <option value="Puntarenas">Puntarenas</option>
+                                                <option value="Heredia">Heredia</option>
+                                                <option value="Limón">Limón</option>
+                                            </select>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <strong>
+                                                <span class="glyphicon glyphicon-eye-open text-primary"></span>
+                                                Cantón:
+                                            </strong>
+                                        </td>
+                                        <td class="text-primary">
+                                            <select required class="form-control" name="ApplicantProvince" id="ApplicantProvince" placeholder="Tibas">
+                                                <option value="San José">San José</option>
+                                                <option value="Cartago">Cartago</option>
+                                                <option value="Guanacaste">Guanacaste</option>
+                                                <option value="Alajuela">Alajuela</option>
+                                                <option value="Puntarenas">Puntarenas</option>
+                                                <option value="Heredia">Heredia</option>
+                                                <option value="Limón">Limón</option>
+                                            </select>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <strong>
+                                                <span class="glyphicon glyphicon-envelope text-primary"></span>
+                                                Distrito:
+                                            </strong>
+                                        </td>
+                                        <td class="text-primary">
+                                            <select required class="form-control" name="ApplicantProvince" id="ApplicantProvince" placeholder="La Florida">
+                                                <option value="San José">San José</option>
+                                                <option value="Cartago">Cartago</option>
+                                                <option value="Guanacaste">Guanacaste</option>
+                                                <option value="Alajuela">Alajuela</option>
+                                                <option value="Puntarenas">Puntarenas</option>
+                                                <option value="Heredia">Heredia</option>
+                                                <option value="Limón">Limón</option>
+                                            </select>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <strong>
+                                                <span class="glyphicon glyphicon-calendar text-primary"></span>
+                                                Ocupación:
+                                            </strong>
+                                        </td>
+                                        <td class="text-primary">
+                                            <select required class="form-control" name="ApplicantProvince" id="ApplicantProvince" placeholder="La Florida">
+                                                <option value="x">Estudiante de Colegio</option>
+                                                <option value="x">Estudiante de Universidad</option>
+                                                <option value="x">Trabajador</option>
+                                            </select>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <strong>
+                                                <span class="glyphicon glyphicon-calendar text-primary"></span>
+                                                Profesión:
+                                            </strong>
+                                        </td>
+                                        <td class="text-primary">
+                                            <input class="form-control" placeholder="Ninguna">
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="col-md-6 text-center">
+                        <img alt="" style="width:200px;" title="" class="img-circle img-thumbnail isTooltip m-4"
+                            src="https://bootdey.com/img/Content/avatar/avatar7.png" data-original-title="Usuario">
+                        <ul title="Ratings" class="list-inline ratings text-center">
+                            <li><a href="#">Editar foto<span class="glyphicon glyphicon-star"></span></a></li>
+                            <li><a href="#">Mis mensajes<span class="glyphicon glyphicon-star"></span></a></li>
+                        </ul>
+                    </div>
+
+                    
                 </div>
             </div>
         </div>
