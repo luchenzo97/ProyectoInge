@@ -2,7 +2,7 @@
 <div class="container p-4">
     <div class="card text-center">
         <div class="card-body">
-            <h1 class="card-title text-uppercase">Aplicante a red MenTe </h1><br>
+            <h1 class="card-title text-uppercase">Aplicante a MenTe en Acción </h1><br>
             <h3 class="ApplicantName">{{Applicant.ApplicantName}} </h3><br>
             <hr />
             <div class="card-table">
@@ -96,7 +96,7 @@
                         <td>{{Applicant.ApplicantCondition}}</td>
                     </tr>
                     <tr>
-                        <th>Discapacitadad: </th>
+                        <th>Discapacidad: </th>
                         <td>{{Applicant.ApplicantConditionName}}</td>
                     </tr>
                     <tr>
@@ -150,13 +150,23 @@
                 </table>
                 <br>
                 <a href="/registry/accept/{{Applicant.ApplicantIdentification}}" class="btn btn-secondary">Aceptar</a>
-                <a href="/registry/applicant/delete/{{Applicant.id}}" class="btn btn-danger">Eliminar</a>
-                
-            </div>
+                <a href="/registry/applicant/delete/{{Applicant.ApplicantIdentification}}" class="btn btn-danger">Declinar</a>
 
+            </div>
         </div>
     </div>
 </div>
 
 {{!-- <td><a href="/registry/applicant/#" class="btn btn-primary"
                             id="ViewApplicants">Ver</a></td> --}}
+
+{{!-- <div class="card">
+    <div class="col-md-4 mx-auto">
+        <table class="ApplicantsTable">
+            <tr>
+                <th>Cédula: </th>
+                <td>{{Applicant.ApplicantIdentification}}</td>
+            </tr>
+        </table>
+    </div>
+</div> --}}

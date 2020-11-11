@@ -35,7 +35,6 @@ app.engine('.hbs', handlebars({
 
 app.set('view engine', '.hbs')
 
-
 /*******************************************************************************/
 //Middlewares
 app.use(session({
@@ -59,7 +58,6 @@ app.use((req,res,next) => {
     app.locals.alerta = req.flash('alerta') //Hacemos disponible el mensaje llamado Success en todas las vistas
     app.locals.error = req.flash('error')
     app.locals.user = req.user //almacenamos el datos de sesion del usuario para que pueda ser utilizado por todas las vistas
-    
     next()
 })
 
@@ -69,6 +67,10 @@ app.use((req,res,next) => {
 app.use(require('./routes/index.js')) //le decimos al app que ejecute lo que se requiere, en este caso, lo que está en la ruta
 app.use(require('./routes/authentication.js'))
 app.use('/registry', require('./routes/registry.js')) //El /registry de primero indica que todas las rutas dentro de links.js le predecerán el /registry a la hora de los POST y GET
+app.use('/account', require('./routes/account.js'))
+app.use('/export', require('./routes/export.js'))
+
+
 
 /*******************************************************************************/
 //Archivos publicos

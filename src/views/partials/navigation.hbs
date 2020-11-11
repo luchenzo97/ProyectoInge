@@ -17,18 +17,18 @@
           <a class="nav-link" href="/registry/applicationsList">Aplicantes</a>
         </li>
 
-        <li class="nav-item">
+        {{!-- <li class="nav-item">
           <a class="nav-link" href="/registry/GraduatedList">Registro Graduadas</a>
-        </li>
+        </li> --}}
         {{else}}
           {{#if user.rolAdmin}}
           <li class="nav-item">
             <a class="nav-link" href="/registry/applicationsList">Aplicantes</a>
           </li>
 
-          <li class="nav-item">
+          {{!-- <li class="nav-item">
             <a class="nav-link" href="/registry/GraduatedList">Registro Graduadas</a>
-          </li>
+          </li> --}}
           {{/if}}
         {{/if}}
 
@@ -43,7 +43,7 @@
         {{else}}
 
         <li class="nav-item">
-          <a class="nav-link" href="/loginColab">Log In</a>
+          <a class="nav-link" href="/login">Log In</a>
         </li>
 
         <li class="nav-item dropdown">
@@ -53,18 +53,18 @@
           </a>
           <div class="dropdown-menu" aria-labelledby="navbarDropdown">
             <a class="dropdown-item" href="/registry/apply">Aplicar a MenTe</a>
-            <div class="dropdown-divider"></div>
-            <a class="dropdown-item" href="/registry/signup">Resistrarme como egresada MenTe</a>
+            {{!-- <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="/registry/signup">Resistrarme como egresada MenTe</a> --}}
           </div>
         </li>
 
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
             aria-haspopup="true" aria-expanded="false">
-            TESTING
+            Registro
           </a>
           <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <a class="dropdown-item" href="/registry/signupColab">Crear usuario colaborador de testing</a>
+            <a class="dropdown-item" href="/registry/signupColab">Registrar usuario Colaborador</a>
           </div>
         </li>
 
