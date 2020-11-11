@@ -45,7 +45,7 @@ CREATE TABLE Applicants
     PRIMARY KEY(ApplicantIdentification)
 );
 
-/*CREATE TABLE MentesInfo
+/*CREATE TABLE Revisadas
 (
     ApplicantName VARCHAR(255),
     ApplicantIdentification VARCHAR(255),
@@ -94,8 +94,10 @@ CREATE TABLE ProfileInfo
     Name VARCHAR(255),
     Identification VARCHAR(255),
     Phone VARCHAR(255),
-    Email VARCHAR(255),
-    Age VARCHAR(255),
+    Email VARCHAR(255) UNIQUE,
+    BirthDate VARCHAR(255),
+	Canton VARCHAR(255),
+	District VARCHAR(255),
     PRIMARY KEY(Identification)
 );
 
@@ -119,4 +121,12 @@ CREATE TABLE RolColab
     Colabname VARCHAR(255),
     PRIMARY KEY(Colabname),
     CONSTRAINT Colabname FOREIGN KEY (Colabname) REFERENCES Users(Username)
+);
+
+CREATE TABLE PasswordRecovery
+(
+    Hashkey varchar(255),
+    Useremail VARCHAR (255),
+    PRIMARY KEY(Hashkey),
+    CONSTRAINT Useremail FOREIGN KEY (Useremail) REFERENCES ProfileInfo(Email)
 );

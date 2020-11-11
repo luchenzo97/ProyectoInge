@@ -3,10 +3,10 @@
 const passport = require('passport') //Passport permite usar redes sociales para loguearse
 const LocalStrategy = require('passport-local').Strategy //Configuracion para crear autenticaciones con la propia bd
 const pool = require('../database')
-const helpers = require('../lib/helpers')
+const { match } = require('../lib/helpers')
 
 
-passport.use('colab.login', new LocalStrategy({
+passport.use('local.login', new LocalStrategy({
     usernameField: 'username',
     passwordField: 'password',
     passReqToCallback: true
@@ -14,8 +14,8 @@ passport.use('colab.login', new LocalStrategy({
     const rows = await pool.query('SELECT * FROM Users WHERE username = ?', [username])
     if (rows.length > 0) {
         const user = rows[0];
-        const match = await helpers.matchPassword(password, user.Password)
-        if (match == true) {
+        const matched = await match(password, user.Password)
+        if (matched) {
             done(null, user)
         }
         else {
@@ -26,28 +26,6 @@ passport.use('colab.login', new LocalStrategy({
         done(null, false, req.flash('error', 'Usuario no existe'))
     }
 }))
-
-// passport.use('local.signup', new LocalStrategy({
-//     usernameField: 'identification',
-//     passwordField: 'password',
-//     passReqToCallback: true
-// }, async (req, done) => {
-//     const temp = req.body //importamos el fullname desde request body
-//     const password = await generatePassword().then()
-//     const newUser = {
-//         username: temp.identification,
-//         password 
-//     }
-//     newUser.password = await helpers.encryptPassword(password)
-//     console.log(password)
-//     try {
-//         await pool.query('INSERT INTO Users SET ?', [newUser])
-//         await pool.query('INSERT INTO RolColab SET ?', [newUser.username])
-//         return done(null, false, req.flash('alerta', 'Registro guardado correctamente'))
-//     } catch (error) {
-//         return done(null, false, req.flash('error', 'Ya existe este usuario'))
-//     }
-// }))
 
 passport.serializeUser((user, done) => {
     done(null, user.Username)
@@ -83,6 +61,10 @@ passport.deserializeUser(async (username, done) => {
         Identification: rows[0].Identification,
         Phone: rows[0].Phone,
         Email: rows[0].Email,
+        BirthDate: rows[0].BirthDate,
+        Province: rows[0].Province,
+        Canton: rows[0].Canton,
+        District: rows[0].District,
         rolAdmin,
         rolColab
     }
